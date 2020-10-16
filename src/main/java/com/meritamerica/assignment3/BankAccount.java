@@ -1,12 +1,14 @@
 package com.meritamerica.assignment3;
 
-public class BankAccount {
+//import com.meritamerica.assignment2.MeritBank;
 
+public class BankAccount {
+	
 	protected double accountBalance;
 	protected double accountInterestRate;
 	protected long accountAccountNumber;
-	
-	
+
+
 	//	1. BankAccount(double balance, double interestRate)
 	public BankAccount(double balance, double interestRate) {
 		accountBalance = balance;
@@ -19,7 +21,7 @@ public class BankAccount {
 		accountInterestRate = 0.01; // default value
 		accountAccountNumber = MeritBank.getNextAccountNumber();
 	}
-	
+
 	//	2. BankAccount(long accountNumber, double balance, double interestRate)
 	public BankAccount(long accountNumber, double balance, double interestRate) {
 		accountAccountNumber = accountNumber;
@@ -63,5 +65,5 @@ public class BankAccount {
 	public double futureValue(int years){
 		return accountBalance * Math.pow(1+ accountInterestRate, years);
 	}
-	}
-	
+}
+
