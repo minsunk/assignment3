@@ -5,8 +5,16 @@ package com.meritamerica.assignment3;
 //import com.meritamerica.assignment2.MeritBank;
 
 public class MeritAmericaBankApp {
+
+	private static final String READ_FILE_NAME = "accountData.txt";
+	private static final String WRITE_FILE_NAME = "newAccountData.txt";
+	
+
 	public static void main(String[] args) {
-	// 1. Add 5 CDOfferings to MeritBank
+		if (MeritBank.readFromFile(READ_FILE_NAME) == true) {
+			MeritBank.writeToFile(WRITE_FILE_NAME);
+		}
+/*	// 1. Add 5 CDOfferings to MeritBank
 		CDOffering[] CDOfferingList = new CDOffering[5];
 		
 		CDOfferingList[0] = new CDOffering(1, .018);
@@ -100,7 +108,6 @@ public class MeritAmericaBankApp {
 		System.out.println("Total Balance for ah3: " + (ah3.getCombinedBalance() + ah3.getCDBalance()));
 		*/
 		
-		System.out.println("Total balance of all accounts held by Merit Bank's account holders: " + MeritBank.totalBalances());
-		
+		//System.out.println("Total balance of all accounts held by Merit Bank's account holders: " + MeritBank.totalBalances());
 	}
 }

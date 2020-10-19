@@ -47,28 +47,10 @@ public class BankAccount {
 	// 5. static BankAccount readFromString(String accountData) throws ParseException
 	//Should throw a java.lang.NumberFormatException if String cannot be correctly parsed
 	public static BankAccount readFromString(String accountData) throws NumberFormatException {
-		int commaCounter = 0;
 		final int NUM_FIELDS = 4;
-		String[] field = new String[NUM_FIELDS];
+		String[] field = accountData.split(",");
 		
-		for (int i = 0; i < NUM_FIELDS; i++) {
-			field[i] = "";
-		}
-		
-		for (int i = 0; i < accountData.length() ; i ++) {
-			if (accountData.charAt(i) == ',') {
-				commaCounter++;
-			} else {
-				try {
-					field[commaCounter] += accountData.charAt(i);
-				}
-				catch (ArrayIndexOutOfBoundsException e) {
-					throw new NumberFormatException();
-				}
-				 
-			}
-		}
-		if (commaCounter != NUM_FIELDS-1) {
+		if (field.length != NUM_FIELDS) {
 			throw new NumberFormatException();
 		}
 		
@@ -90,9 +72,9 @@ public class BankAccount {
 	}
 	
 	//6. String writeToString()
-	public String writeTostring() {
+	public String writeToString() {
 		DateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy");
-		return this.accountNumber + "," + this.balance + "," + this.interestRate + "," + dateFormat.format(this.openDate);
+		return this.accountNumber + "," + this.balance + "," + String.format("%.4f", this.interestRate) + "," + dateFormat.format(this.openDate);
 	}
 		
 	//***long getAccountNumber() *** from assignment 2

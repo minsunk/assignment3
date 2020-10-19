@@ -1,11 +1,14 @@
 package com.meritamerica.assignment3;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import com.meritamerica.assignment3.CDAccount;
 import com.meritamerica.assignment3.CDOffering;
 import com.meritamerica.assignment3.CheckingAccount;
 import com.meritamerica.assignment3.SavingsAccount;
 
-public class AccountHolder {
+public class AccountHolder implements Comparable<AccountHolder> {
 
 	private String myFirstName;
 	private String myMiddleName;
@@ -244,7 +247,7 @@ public class AccountHolder {
 	}
 
 	//23. int getNumberOfCDAccounts()
-	public int getNumberofCDAccounts() {
+	public int getNumberOfCDAccounts() {
 		if (cdAccountList != null) {
 			return cdAccountList.length;
 		} else {
@@ -269,5 +272,30 @@ public class AccountHolder {
 	public double getCombinedBalance(){
 		return getCheckingBalance() + getSavingsBalance() + getCDBalance();
 	}
+	//implement the compareTo(AccountHolder otherAccountHolder) method
+	@Override
+	public int compareTo(AccountHolder otherAccountHolder) {
+		if (this.getCombinedBalance() > otherAccountHolder.getCombinedBalance())
+			return 1;
+		else if (this.getCombinedBalance() < otherAccountHolder.getCombinedBalance())
+			return -1;
+		else
+			return 0;
+	}
+
+	//String writeToString()
+	public String writeToString() {
+		String returnStr = "";
+		returnStr += this.myLastName + "," + this.myMiddleName + "," + this.myFirstName + "," + this.mySsn;
+				
+		return returnStr;
+	}
+	
+	public static AccountHolder readFromString(String accountHolderInfo) {
+		String[] accountinfo = accountHolderInfo.split(",");
+		AccountHolder accountHolder = new AccountHolder(accountinfo[2], accountinfo[1], accountinfo[0], accountinfo[3]);
+		return accountHolder;
+	}
+	
 	
 }

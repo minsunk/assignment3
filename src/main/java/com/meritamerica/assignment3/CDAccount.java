@@ -40,28 +40,10 @@ public class CDAccount extends BankAccount{
 	}
 	
 	public static CDAccount readFromString(String accountData) throws NumberFormatException{
-		int commaCounter = 0;
 		final int NUM_FIELDS = 5;
-		String[] field = new String[NUM_FIELDS];
+		String[] field = accountData.split(",");
 		
-		for (int i = 0; i < NUM_FIELDS; i++) {
-			field[i] = "";
-		}
-		
-		for ( int i = 0; i < accountData.length(); i++) {
-			if (accountData.charAt(i) == ',') {
-				commaCounter ++;
-			} else {
-				try {
-					field[commaCounter] += accountData.charAt(i);
-				}
-				catch (ArrayIndexOutOfBoundsException e ) {
-					throw new NumberFormatException(); 
-				}
-					
-			}
-		}
-		if (commaCounter != NUM_FIELDS-1) {
+		if (field.length != NUM_FIELDS) {
 			throw new NumberFormatException();
 		}
 		CDAccount newCDAccount = null;
@@ -82,7 +64,9 @@ public class CDAccount extends BankAccount{
 	}
 
 	//6. String writeToString()
-	public String writeTostring() {
+	
+	@Override
+	public String writeToString() {
 		DateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy");
 		return this.accountNumber + "," + this.balance + "," + this.interestRate + "," + dateFormat.format(this.openDate) + "," + this.term;
 	}
