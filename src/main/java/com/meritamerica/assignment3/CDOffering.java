@@ -1,7 +1,6 @@
 package com.meritamerica.assignment3;
 
 public class CDOffering {
-	private static String cdOfferingInfo;
 	private int term;
 	private double interestRate;
 	
@@ -12,8 +11,7 @@ public class CDOffering {
 		
 		}
 
-	public CDOffering(String s, String s1) {
-	}
+
 
 	//2. int getTerm ()
 		public int getTerm() {
@@ -25,15 +23,14 @@ public class CDOffering {
 			return this.interestRate;
 		}
 
-	@Override
 	public String writeToString(){
 		return term+","+interestRate;
 	}
 
-	public static int[] readFromString(int cdOfferingInfo) {
-		int[] cdInfo =  cdOfferingInfo.split("regex:",");
-				CDOffering cDOffering = new CDOffering(cdOfferingInfo[0], cdOfferingInfo[1]);
-		return CDOffering;
+	public static CDOffering readFromString(String cdOfferingInfo) {
+		String[] cdInfo =  cdOfferingInfo.split(",");
+				CDOffering cDOffering = new CDOffering(Integer.getInteger(cdInfo[0]), Double.valueOf(cdInfo[1]));
+		return cDOffering;
 	}
 }
-}
+
