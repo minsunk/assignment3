@@ -308,7 +308,7 @@ public class AccountHolder implements Comparable<AccountHolder> {
 	}
 
 	@Override
-	public String toString(){
+	public String writeToString(){
 		return myFirstName+","+myMiddleName+","+myLastName+","+mySsn;
 	}
 
