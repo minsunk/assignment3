@@ -10,7 +10,7 @@ public class CDAccount extends BankAccount{
   	private int term;
 	
 	// CDAccount(CDOffering offering, double balance)
-	public CDAccount(CDOffering offering, double balance) throws ParseException {
+	public CDAccount(CDOffering offering, double balance) {
 		super(balance, offering.getInterestRate());
 		this.term = offering.getTerm();
 	}

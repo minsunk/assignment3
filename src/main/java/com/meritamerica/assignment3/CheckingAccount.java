@@ -8,11 +8,11 @@ import java.util.Date;
 
 public class CheckingAccount extends BankAccount{
 	
-	public CheckingAccount(double balance, double interestRate) throws ParseException{
+	public CheckingAccount(double balance, double interestRate) {
 		super(balance, interestRate);
 	}
 	
-	public CheckingAccount(double balance) throws ParseException {
+	public CheckingAccount(double balance) {
 		super(balance);
 	}
 	

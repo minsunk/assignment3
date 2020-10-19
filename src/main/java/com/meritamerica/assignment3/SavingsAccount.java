@@ -7,11 +7,11 @@ import java.util.Date;
 
 public class SavingsAccount extends BankAccount{
 	
-	public SavingsAccount(double balance, double interestRate) throws ParseException{
+	public SavingsAccount(double balance, double interestRate) {
 		super(balance, interestRate);
 	}
 	
-	public SavingsAccount(double balance) throws ParseException {
+	public SavingsAccount(double balance) {
 		super(balance);
 	}
 	

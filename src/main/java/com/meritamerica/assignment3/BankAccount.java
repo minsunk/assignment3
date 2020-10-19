@@ -18,12 +18,28 @@ public class BankAccount {
 	
 
 	//	1. BankAccount(double balance, double interestRate)
-	public BankAccount(double balance, double interestRate) throws ParseException{
-		this(MeritBank.getNextAccountNumber(), balance, interestRate, (new SimpleDateFormat("mm/dd/yyyy")).parse(DEFAULT_DATE_STRING));
+	public BankAccount(double balance, double interestRate) {
+		this.accountNumber = MeritBank.getNextAccountNumber();
+		this.balance = balance;
+		this.interestRate = interestRate;
+		try {
+			this.openDate = (new SimpleDateFormat("mm/dd/yyyy")).parse(DEFAULT_DATE_STRING);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public BankAccount(double balance) throws ParseException {
-		this(MeritBank.getNextAccountNumber(), balance, DEFAULT_INTEREST_RATE, (new SimpleDateFormat("mm/dd/yyyy")).parse(DEFAULT_DATE_STRING));
+	public BankAccount(double balance) {
+		this.accountNumber = MeritBank.getNextAccountNumber();
+		this.balance = balance;
+		this.interestRate = DEFAULT_INTEREST_RATE;
+		try {
+			this.openDate = (new SimpleDateFormat("mm/dd/yyyy")).parse(DEFAULT_DATE_STRING);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	// 2. BankAccount(double balance, double interestRate, java.util.Date accountOpenedOn)

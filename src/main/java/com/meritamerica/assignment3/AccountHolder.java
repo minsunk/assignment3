@@ -1,8 +1,5 @@
 package com.meritamerica.assignment3;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
 import com.meritamerica.assignment3.CDAccount;
 import com.meritamerica.assignment3.CDOffering;
 import com.meritamerica.assignment3.CheckingAccount;
