@@ -5,7 +5,9 @@ import com.meritamerica.assignment3.CDOffering;
 import com.meritamerica.assignment3.CheckingAccount;
 import com.meritamerica.assignment3.SavingsAccount;
 
-public class AccountHolder {
+import java.text.ParseException;
+
+public class AccountHolder implements Comparable<AccountHolder> {
 
 	private String myFirstName;
 	private String myMiddleName;
@@ -77,14 +79,22 @@ public class AccountHolder {
 		} else {
 			if (checkingAccountList == null) {
 				checkingAccountList = new CheckingAccount[1];
-				
-				checkingAccountList[0] = new CheckingAccount(openingBalance, CHECKING_ACCOUNT_INTEREST_RATE);
+
+				try {
+					checkingAccountList[0] = new CheckingAccount(openingBalance, CHECKING_ACCOUNT_INTEREST_RATE);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 			} else {
 				CheckingAccount[] tempCheckingAccount = new CheckingAccount[checkingAccountList.length + 1];
 				for (int i = 0; i < checkingAccountList.length; i++) {
 					tempCheckingAccount[i] = checkingAccountList[i];
 				}
-				tempCheckingAccount[checkingAccountList.length] = new CheckingAccount(openingBalance, CHECKING_ACCOUNT_INTEREST_RATE);
+				try {
+					tempCheckingAccount[checkingAccountList.length] = new CheckingAccount(openingBalance, CHECKING_ACCOUNT_INTEREST_RATE);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 				checkingAccountList = tempCheckingAccount;
 			}
 			
@@ -145,14 +155,22 @@ public class AccountHolder {
 		} else {
 			if (savingsAccountList == null) {
 				savingsAccountList = new SavingsAccount[1];
-				
-				savingsAccountList[0] = new SavingsAccount(openingBalance, SAVINGS_ACCOUNT_INTEREST_RATE);
+
+				try {
+					savingsAccountList[0] = new SavingsAccount(openingBalance, SAVINGS_ACCOUNT_INTEREST_RATE);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 			} else {
 				SavingsAccount[] tempSavingsAccount = new SavingsAccount[savingsAccountList.length + 1];
 				for (int i = 0; i < savingsAccountList.length; i++) {
 					tempSavingsAccount[i] = savingsAccountList[i];
 				}
-				tempSavingsAccount[savingsAccountList.length] = new SavingsAccount(openingBalance, SAVINGS_ACCOUNT_INTEREST_RATE);
+				try {
+					tempSavingsAccount[savingsAccountList.length] = new SavingsAccount(openingBalance, SAVINGS_ACCOUNT_INTEREST_RATE);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 				savingsAccountList = tempSavingsAccount;
 			}
 			return savingsAccountList[savingsAccountList.length - 1];
@@ -211,13 +229,21 @@ public class AccountHolder {
 		if (offering != null && openingBalance >= 0) {
 			if (cdAccountList == null) {
 				cdAccountList = new CDAccount[1];
-				cdAccountList[0] = new CDAccount(offering, openingBalance);
+				try {
+					cdAccountList[0] = new CDAccount(offering, openingBalance);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 			} else {
 				CDAccount[] tempCDAccount = new CDAccount[cdAccountList.length + 1];
 				for ( int i=0; i < cdAccountList.length; i++) {
 					cdAccountList[i] = tempCDAccount[i];
 				}
-				tempCDAccount[cdAccountList.length] = new CDAccount(offering, openingBalance);
+				try {
+					tempCDAccount[cdAccountList.length] = new CDAccount(offering, openingBalance);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 				cdAccountList = tempCDAccount;
 			}
 		}
@@ -269,5 +295,26 @@ public class AccountHolder {
 	public double getCombinedBalance(){
 		return getCheckingBalance() + getSavingsBalance() + getCDBalance();
 	}
-	
+
+	@Override
+	public int compareTo(AccountHolder otherAccountHolder) {
+		if(getCombinedBalance() == otherAccountHolder.getCombinedBalance()) {
+			return 0;
+		} else if (getCombinedBalance() > otherAccountHolder.getCombinedBalance()) {
+			return 1;
+		} else {
+			return -1;
+		}
+	}
+
+	@Override
+	public String toString(){
+		return myFirstName+","+myMiddleName+","+myLastName+","+mySsn;
+	}
+
+	public static AccountHolder readFromString(String accountHolderInfo) {
+		String[] accountinfo = accountHolderInfo.split(",");
+		AccountHolder accountHolder = new AccountHolder(accountinfo[0], accountinfo[1], accountinfo[2], accountinfo[3]);
+		return accountHolder;
+	}
 }
