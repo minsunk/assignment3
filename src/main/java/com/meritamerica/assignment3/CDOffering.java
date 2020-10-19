@@ -10,9 +10,7 @@ public class CDOffering {
 			this.interestRate = interestRate;
 		
 		}
-
-
-
+		
 	//2. int getTerm ()
 		public int getTerm() {
 			return this.term;
@@ -22,15 +20,19 @@ public class CDOffering {
 		public double getInterestRate() {
 			return this.interestRate;
 		}
+		 static CDOffering readFromString(String cdOfferingDataString) 
+		 {
+		    	String[] holding = cdOfferingDataString.split(",");
+		    	int term = Integer.parseInt(holding[0]);
+		    	double interestRate = Double.parseDouble(holding[1]);
+		    	return new CDOffering(term, interestRate);
+		  }
 
-	public String writeToString(){
-		return term+","+interestRate;
-	}
-
-	public static CDOffering readFromString(String cdOfferingInfo) {
-		String[] cdInfo =  cdOfferingInfo.split(",");
-				CDOffering cDOffering = new CDOffering(Integer.getInteger(cdInfo[0]), Double.valueOf(cdInfo[1]));
-		return cDOffering;
-	}
+		public String writeToString() 
+		{
+		    	StringBuilder cdOfferingData = new StringBuilder();
+		    	cdOfferingData.append(term).append(",");
+		    	cdOfferingData.append(interestRate);
+		    	return cdOfferingData.toString(); 
 }
-
+}
